@@ -1,0 +1,8 @@
+
+streamlit==1.38.0
+music21==9.1.0
+soundfile>=0.12.1
+basic-pitch==0.2.7
+tensorflow>=2.12; platform_machine != "arm64"  # if Apple Silicon, install tensorflow-macos separately
+numpy>=1.26
+# For audio file reading (soundfile) and OSMD is loaded via CDN in the component
