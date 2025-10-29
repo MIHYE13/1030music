@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import base64
 import json
 
@@ -46,7 +47,7 @@ with tab1:
 
         # JS에 안전하게 전달하기 위해 JSON 인코딩 사용 (백틱/따옴표/개행 이스케이프)
         abc_json = json.dumps(abc)
-        st.components.v1.html(f"""
+        components.html(f"""
         <div id="paper"></div>
         <script src="https://cdn.jsdelivr.net/npm/abcjs@6.4.0/bin/abcjs_basic.min.js"></script>
         <script>
@@ -73,7 +74,7 @@ with tab2:
 
         # 동일하게 안전하게 전달
         abc_acc_json = json.dumps(abc_with_acc)
-        st.components.v1.html(f"""
+        components.html(f"""
         <div id="paper2"></div>
         <script src="https://cdn.jsdelivr.net/npm/abcjs@6.4.0/bin/abcjs_basic.min.js"></script>
         <script>
