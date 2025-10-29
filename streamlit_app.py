@@ -1,6 +1,6 @@
 import streamlit as st
 import base64
-from io import BytesIO
+import json
 
 # --- Placeholders (실제 구현은 아래 함수 대체) ---
 def extract_melody(audio_bytes):
@@ -43,11 +43,14 @@ with tab1:
         notes = simplify_and_transpose(notes, target_key="C")
         abc  = notes_to_abc(notes, key="C")
         st.subheader("간단 멜로디 악보")
+
+        # JS에 안전하게 전달하기 위해 JSON 인코딩 사용 (백틱/따옴표/개행 이스케이프)
+        abc_json = json.dumps(abc)
         st.components.v1.html(f"""
         <div id="paper"></div>
         <script src="https://cdn.jsdelivr.net/npm/abcjs@6.4.0/bin/abcjs_basic.min.js"></script>
         <script>
-          var abc = `{abc}`;
+          var abc = {abc_json};
           ABCJS.renderAbc("paper", abc);
         </script>
         """, height=220)
@@ -67,11 +70,14 @@ with tab2:
         chords = estimate_chords(notes, key="C")
         abc_with_acc = add_piano_accompaniment(notes, chords, pattern="block")
         st.subheader("멜로디 + 피아노 반주")
+
+        # 동일하게 안전하게 전달
+        abc_acc_json = json.dumps(abc_with_acc)
         st.components.v1.html(f"""
         <div id="paper2"></div>
         <script src="https://cdn.jsdelivr.net/npm/abcjs@6.4.0/bin/abcjs_basic.min.js"></script>
         <script>
-          var abc = `{abc_with_acc}`;
+          var abc = {abc_acc_json};
           ABCJS.renderAbc("paper2", abc);
         </script>
         """, height=260)
