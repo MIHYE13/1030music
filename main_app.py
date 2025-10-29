@@ -49,11 +49,8 @@ with tab1:
         abc_json = json.dumps(abc)
         components.html(f"""
         <div id="paper"></div>
-        <script src="https://cdn.jsdelivr.net/npm/abcjs@6.4.0/bin/abcjs_basic.min.js"></script>
-        <script>
-          var abc = {abc_json};
-          ABCJS.renderAbc("paper", abc);
-        </script>
+        <script src="https://cdn.jsdelivr.net/npm/abcjs@6.4.0/bin/abcjs_basic.min.js"
+                onload="ABCJS.renderAbc('paper', {abc_json});"></script>
         """, height=220)
         st.markdown(abc_download_link(abc), unsafe_allow_html=True)
 
@@ -76,9 +73,6 @@ with tab2:
         abc_acc_json = json.dumps(abc_with_acc)
         components.html(f"""
         <div id="paper2"></div>
-        <script src="https://cdn.jsdelivr.net/npm/abcjs@6.4.0/bin/abcjs_basic.min.js"></script>
-        <script>
-          var abc = {abc_acc_json};
-          ABCJS.renderAbc("paper2", abc);
-        </script>
+        <script src="https://cdn.jsdelivr.net/npm/abcjs@6.4.0/bin/abcjs_basic.min.js"
+                onload="ABCJS.renderAbc('paper2', {abc_acc_json});"></script>
         """, height=260)
